@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.CounterApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.CounterApp" parent="android:Theme.Material.Light.NoActionBar" >
+
+     <!-- ... -->
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:windowLightStatusBar">false</item> <!-- اگر متن استاتوس بار را به رنگ سفید می‌خواهید، این خط را حذف کنید -->
+        <!-- ... -->
+    </style>
+
 </resources>

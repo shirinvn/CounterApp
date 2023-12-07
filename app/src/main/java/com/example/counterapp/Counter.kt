@@ -6,18 +6,40 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.counterapp.ui.theme.Purple40
+import com.example.counterapp.ui.theme.PurpleGrey80
 
 const val COUNT_PREF_KEY = "count_pref_key"
 
+@Preview
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun TasbihCounter() {
@@ -25,26 +47,54 @@ fun TasbihCounter() {
     var count by remember { mutableStateOf(loadCount(context)) }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+            .background(Purple40),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = count.toString())
 
 
 
-        Button(onClick = {
+        ResetButton { count = 0 }
+
+
+        Text(modifier = Modifier
+            .height(70.dp)
+            .width(200.dp)
+            .background(
+                shape = RoundedCornerShape(10.dp),
+                color = Color.Red
+            )
+            ,text = count.toString(), fontFamily = FontFamily.Cursive,
+            fontSize = 50.sp,
+            textAlign = TextAlign.Center,
+            color = Color.White
+
+            )
+
+
+
+        Button(modifier = Modifier
+            .weight(1f)
+            .fillMaxWidth()
+            .padding(10.dp)
+            ,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = PurpleGrey80
+            ),
+            onClick = {
             count++
             saveCount(context, count)
-            // Add vibration here for each click if needed
             vibrateShort(context)
             if (count % 100 == 0) {
                 vibrateLong(context)
             }
         }) {
-            Text(text = "افزودن")
+            Text(text = "")
         }
 
-        ResetButton { count = 0 }
 
     }
 }
@@ -110,7 +160,26 @@ fun ResetButton(resetAction: () -> Unit = { 0 }){
         )
     }
 
-    Button(onClick = { showDialog = true }) {
-        Text(text = "ریست")
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(110.dp)
+            .padding(top = 10.dp,  end = 10.dp),
+       horizontalArrangement = Arrangement.End,
+        verticalAlignment = Alignment.Bottom
+        ,
+    ) {
+
+        Button(modifier = Modifier
+            .size(78.dp)
+            ,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = PurpleGrey80
+            ),
+
+            onClick = { showDialog = true }) {
+            Text(text = "ریست")
+        }
     }
+
 }
