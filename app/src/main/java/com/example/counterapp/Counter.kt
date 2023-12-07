@@ -65,12 +65,12 @@ fun TasbihCounter() {
             .width(200.dp)
             .background(
                 shape = RoundedCornerShape(10.dp),
-                color = Color.Red
+                color = Color.Green
             )
             ,text = count.toString(), fontFamily = FontFamily.Cursive,
             fontSize = 50.sp,
             textAlign = TextAlign.Center,
-            color = Color.White
+            color = Color.Black
 
             )
 
@@ -92,7 +92,7 @@ fun TasbihCounter() {
                 vibrateLong(context)
             }
         }) {
-            Text(text = "")
+            Text(text = "اینجا بشمار", color = Color.Black, fontSize = 18.sp)
         }
 
 
@@ -178,7 +178,7 @@ fun ResetButton(resetAction: () -> Unit = { 0 }){
             ),
 
             onClick = { showDialog = true }) {
-            Text(text = "ریست")
+            Text(text = "ریست", color = Color.Black, fontSize = 14.sp)
         }
     }
 
